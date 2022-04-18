@@ -316,16 +316,21 @@ def read64(base64String):
     #convert RGB to BGR
     return tempImg
 
-global fps,prev_recv_time,cnt,fps_array
+global fps,prev_recv_time,cnt,fps_array, busy
 fps=30
 prev_recv_time = 0
 cnt=0
 fps_array=[0]
+busy = False
 
 # listen receive image event data
 @socketio.on('image')
 def image(videoImage):
-    global fps, prev_recv_time, cnt, fps_array
+    global fps, prev_recv_time, cnt, fps_array, busy
+
+    if busy == True:
+        return
+    busy = True
     recv_time =  time.time()
     # print("Image recv time: ", recv_time)
     text  = "FPS: " + str(fps)
@@ -352,6 +357,7 @@ def image(videoImage):
 
          # emit the frame back
         emit('response_back', stringData)  #send image  string back to frontend 
+    busy = False
 
        
         # fps_array.append(fps)
