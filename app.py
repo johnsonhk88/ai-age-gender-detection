@@ -327,7 +327,7 @@ fps_array=[0]
 def image(videoImage):
     global fps, prev_recv_time, cnt, fps_array
     recv_time =  time.time()
-    print("Image recv time: ", recv_time)
+    # print("Image recv time: ", recv_time)
     text  = "FPS: " + str(fps)
     frame = (read64(videoImage)) # convert into image frame from 
 
@@ -335,13 +335,15 @@ def image(videoImage):
     resFrame = ageGenderDetect(frame)
     if resFrame is not None:
         # image encode to jpeg
-        fps = 1/(recv_time - prev_recv_time)
+        detectTime = recv_time - prev_recv_time
+        print("Image Detect Time: ", detectTime , " s")
+        fps = 1/(detectTime)
         fps =round(fps , 1)
         strFps = device + " FPS: " + str(fps)
         prev_recv_time = recv_time
         print(device , " FPS: ", fps)
         cv.putText(resFrame, strFps, (0, 140), cv.FONT_HERSHEY_DUPLEX, 0.6, (255, 255, 0), 1, cv.LINE_AA)
-        imgencode = cv.imencode('.jpeg', resFrame, [ cv.IMWRITE_JPEG_QUALITY, 90])[1] # encode image to jpeg format
+        imgencode = cv.imencode('.jpeg', resFrame, [ cv.IMWRITE_JPEG_QUALITY, 40])[1] # encode image to jpeg format
 
         #convert into  base64 encode
         stringData = base64.b64encode(imgencode).decode('utf-8')
