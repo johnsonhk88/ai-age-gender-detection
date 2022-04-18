@@ -1,0 +1,23 @@
+#dependencies
+/python/node_modules
+/python/.pnp
+/python/.pnp.js
+
+__pycache__
+
+# testing
+/python/coverage
+
+# production
+/python/build
+
+# misc
+/python/.DS_Store
+/python/.env.local
+/python/.env.development.local
+/python/.env.test.local
+/python/.env.production.local
+
+/python/npm-debug.log*
+/python/yarn-debug.log*
+/python/yarn-error.log*

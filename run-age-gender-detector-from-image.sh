@@ -1,0 +1,1 @@
+python3 ageGenderDetect.py --device cpu --input canvas.png  --threshold 0.75

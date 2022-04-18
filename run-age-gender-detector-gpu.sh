@@ -1,0 +1,1 @@
+python3 ageGenderDetect.py --device gpu  --threshold 0.75
