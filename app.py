@@ -380,4 +380,5 @@ def videoFeed():
 
 if __name__ == '__main__':
     # app.run(host='0.0.0.0', port=2204, threaded=True)
-    socketio.run(app, port=5000 ,debug=True,  async_mode='eventlet')
+    # socketio.run(app, port=5000 ,debug=True,  async_mode='eventlet')
+    socketio.run(app, port=5000 ,debug=True,  async_mode="threading")
