@@ -34,7 +34,8 @@
         <script type="text/javascript" charset="utf-8">
 
             // var socket = io.connect(window.location.protocol + '//' + document.domain + ':' + location.port);
-            var socket = io.connect('http://127.0.0.1:5000')
+            // var socket = io.connect('http://127.0.0.1:5000') // for localhost test
+            var socket = io.connect("https://ai-age-gender-detection.herokuapp.com/") // for production 
             socket.on('connect', function(){
                 console.log("Connected...!", socket.connected)
             });

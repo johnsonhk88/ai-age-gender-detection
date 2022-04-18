@@ -218,7 +218,7 @@ def ageGenderDetect(frame):
     # cv.putText(frameFace, strFps, (0, 140), cv.FONT_HERSHEY_DUPLEX, 0.6, (255, 255, 0), 1, cv.LINE_AA)
     # cv.imshow("Age Gender Demo", frameFace) 
     # cap.release()
-    cv.destroyAllWindows()
+    # cv.destroyAllWindows()
     return frameFace
 
 
@@ -293,7 +293,7 @@ def getVideo(cap):
 
     print("Camera Close")    
     cap.release()
-    cv.destroyAllWindows()
+    # cv.destroyAllWindows()c
 
 
 def read64(base64String):
