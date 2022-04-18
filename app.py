@@ -19,7 +19,7 @@ socketio = SocketIO(app, cors_allowed_origins='*')
 
 currentDir = os.getcwd()
 # print(currentDir)
-currentDir = "/home/johnsonhk88/Full-Stack-Project/simple-videochat-webrtc/python/"
+# currentDir = "/home/johnsonhk88/Full-Stack-Project/simple-videochat-webrtc/python/"
 
 absolutepath = os.path.abspath(__file__)
 print(absolutepath)
