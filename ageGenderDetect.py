@@ -150,35 +150,35 @@ while cap.isOpened():
     
     if not bboxes:
         print("No face Detected, Checking next frame")
-        continue
+    else:
 
-    for bbox in bboxes:
-        # print(bbox)
-        #get the face boundary box x1, y1, x2, y2 coordinate  -> y height, x width 
-        face = frame[max(0,bbox[1]-padding):min(bbox[3]+padding,frame.shape[0]-1),max(0,bbox[0]-padding):min(bbox[2]+padding, frame.shape[1]-1)]
+        for bbox in bboxes:
+            # print(bbox)
+            #get the face boundary box x1, y1, x2, y2 coordinate  -> y height, x width 
+            face = frame[max(0,bbox[1]-padding):min(bbox[3]+padding,frame.shape[0]-1),max(0,bbox[0]-padding):min(bbox[2]+padding, frame.shape[1]-1)]
 
-        #create blob format
-        blob = cv.dnn.blobFromImage(face, 1.0, (227, 227), MODEL_MEAN_VALUES, swapRB=False)
+            #create blob format
+            blob = cv.dnn.blobFromImage(face, 1.0, (227, 227), MODEL_MEAN_VALUES, swapRB=False)
 
-        #find gender
-        genderNet.setInput(blob)
-        genderPredict = genderNet.forward() # 
-        gender = genderList[genderPredict[0].argmax()]
-        # print("GenderPredict: ", genderPredict)
-        print("Gender: {} , conf = {:.3f}".format(gender, genderPredict[0].max()) )
-        
-        # find age
-        ageNet.setInput(blob)
-        agePredict = ageNet.forward()
-        age = ageList[agePredict[0].argmax()]
-        # print("Age Output : {}".format(agePredict))
-        print("Age : {}, conf = {:.3f}".format(age, agePredict[0].max()))
+            #find gender
+            genderNet.setInput(blob)
+            genderPredict = genderNet.forward() # 
+            gender = genderList[genderPredict[0].argmax()]
+            # print("GenderPredict: ", genderPredict)
+            print("Gender: {} , conf = {:.3f}".format(gender, genderPredict[0].max()) )
 
-        #create label for show output
-        label = "{},{}".format(gender, age)
+            # find age
+            ageNet.setInput(blob)
+            agePredict = ageNet.forward()
+            age = ageList[agePredict[0].argmax()]
+            # print("Age Output : {}".format(agePredict))
+            print("Age : {}, conf = {:.3f}".format(age, agePredict[0].max()))
 
-        cv.putText(frameFace, label, (bbox[0], bbox[1]-10), cv.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv.LINE_AA)
-        cv.imshow("Age Gender Demo", frameFace)
+            #create label for show output
+            label = "{},{}".format(gender, age)
+
+            cv.putText(frameFace, label, (bbox[0], bbox[1]-10), cv.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv.LINE_AA)
+            cv.imshow("Age Gender Demo", frameFace)
 
 
     #fps show
